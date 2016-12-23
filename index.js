@@ -1,24 +1,28 @@
-var koa = require('koa')
-var router = require('koa-router')
-var views = require('co-views')
+const Koa = require('koa')
+const Router = require('koa-router')
+const views = require('co-views')
 
-var render = views(__dirname + '/views',  { ext: 'ejs'})
+const render = views(__dirname + '/views',  { ext: 'ejs'})
 
-var app = koa()
+const app = new Koa()
 
-app.use(router(app))
+const router = new Router()
 
-app.get('/', index)
-app.get('/about', about)
+router.get('/', index)
+router.get('/about', about)
 
-function *index() {
-  this.body = yield render('index', {})
+async function index(ctx) {
+  ctx.body = await render('index', {});
 }
 
-function *about() {
+async function about(ctx) {
   console.log('Koa Context (this) has these properties: ');
-  console.log(Object.keys(this));
-  this.body = "<h2>This is the about route</h2>";
+  console.log(Object.keys(ctx));
+  ctx.body = "<h2>This is the about route</h2>";
 }
+
+app.use(router.routes())
+
+
 
 app.listen(3000)
