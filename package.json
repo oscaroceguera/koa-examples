@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "co-body": "^4.2.0",
+    "co-views": "^2.1.0",
+    "ejs": "^2.5.5",
     "koa": "^0.12.2",
     "koa-router": "^3.4.0",
     "mongoose": "^4.7.4"
